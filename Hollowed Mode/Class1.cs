@@ -58,7 +58,7 @@ namespace Hollowed_Mode
         {
             
         }
-        public override string GetVersion() => "No Eyes";
+        public override string GetVersion() => "V1";
         
         public override List<(string, string)> GetPreloadNames()
         {
