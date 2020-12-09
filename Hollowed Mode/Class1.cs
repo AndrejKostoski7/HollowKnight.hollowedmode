@@ -51,20 +51,21 @@ namespace Hollowed_Mode
         {
             
         }
-        public override string GetVersion() => "Ibucko";
+        public override string GetVersion() => "Alpha 1.1";
         
         public override List<(string, string)> GetPreloadNames()
         {
             return new List<(string, string)>
             {
+                //Some of the gameobjects are in comments to speed up loading time while testing
                 ("Tutorial_01", "_Props/Cave Spikes"),
                 ("Tutorial_01", "_Props/Cave Spikes (2)"),
-                //("Fungus1_30", "fungd_spikes_06"),
-                //("Fungus1_30", "fungd_spikes_05"),
-                //("Fungus1_30", "Thorn Collider (7)"),
+                ("Fungus1_30", "fungd_spikes_06"),
+                ("Fungus1_30", "fungd_spikes_05"),
+                ("Fungus1_30", "Thorn Collider (7)"),
                 ("Fungus2_13", "Direction Pole Bench"),
-                //("Tutorial_01", "_Scenery/plat_float_19"),
-                //("Crossroads_07", "_Scenery/plat_lift_11"),
+                ("Tutorial_01", "_Scenery/plat_float_19"),
+                ("Crossroads_07", "_Scenery/plat_lift_11"),
                 //("GG_Ghost_Xero", "Warrior/Ghost Warrior Xero/White Flash"),
                 //("GG_Ghost_No_Eyes", "Warrior/Ghost Warrior No Eyes/Warp Out"),
                 ("Town", "RestBench"),
@@ -73,7 +74,7 @@ namespace Hollowed_Mode
                 ("Tutorial_01", "_Enemies/Buzzer 1"),
                 ("Crossroads_04", "_Enemies/Fly Spawn/Fly 1"),
                 //("White_Palace_05", "wp_saw (14)"),
-                ("Deepnest_44", "shadow_gate"),
+                //("Deepnest_44", "shadow_gate"),
                 ("GG_Hollow_Knight", "Battle Scene/Focus Blasts/HK Prime Blast (4)/Blast"),
                 ("Room_Colosseum_Gold", "Colosseum Manager/Waves/Wave 25/Electric Mage New"),
                 ("Crossroads_03", "_Props/Toll Gate"),
@@ -83,12 +84,12 @@ namespace Hollowed_Mode
                 ("Crossroads_35","Infected_Parent/Hatcher (1)"),
                 //("Fungus1_19", "_Enemies/Fat Fly"),
                 ("Crossroads_22", "Spitter (3)"),
-                //("Fungus3_24", "Zap Cloud (1)"),
+                ("Fungus3_24", "Zap Cloud (1)"),
                 //("Fungus2_08", "Mushroom Turret"),
                 //("Ruins1_17", "Ruins Sentry 1"),
                 //("Ruins1_17", "Ruins Flying Sentry Javelin (1)"),
                 ("Deepnest_East_04", "Super Spitter"),
-                //("GG_Mage_Knight", "Mage Knight"),
+                ("GG_Mage_Knight", "Mage Knight"),
                 //("GG_Traitor_Lord", "Battle Scene/Wave 3/Mantis Traitor Lord"),
                 ("GG_Soul_Master", "Mage Lord")
             };
@@ -107,19 +108,19 @@ namespace Hollowed_Mode
             ModHooks.Instance.HeroUpdateHook += OnHeroUpdate;
             preloadedGO.Add("SpikeCol", preloadedObjects["Tutorial_01"]["_Props/Cave Spikes"]);
             preloadedGO.Add("Spikes", preloadedObjects["Tutorial_01"]["_Props/Cave Spikes (2)"]);
-            //preloadedGO.Add("ThornSmall1", preloadedObjects["Fungus1_30"]["fungd_spikes_05"]);
-            //preloadedGO.Add("ThornSmall2", preloadedObjects["Fungus1_30"]["fungd_spikes_06"]);
-            //preloadedGO.Add("ThornCol", preloadedObjects["Fungus1_30"]["Thorn Collider (7)"]);
+            preloadedGO.Add("ThornSmall1", preloadedObjects["Fungus1_30"]["fungd_spikes_05"]);
+            preloadedGO.Add("ThornSmall2", preloadedObjects["Fungus1_30"]["fungd_spikes_06"]);
+            preloadedGO.Add("ThornCol", preloadedObjects["Fungus1_30"]["Thorn Collider (7)"]);
             preloadedGO.Add("BenchDirectionPole", preloadedObjects["Fungus2_13"]["Direction Pole Bench"]);
-            //preloadedGO.Add("LongPlat", preloadedObjects["Tutorial_01"]["_Scenery/plat_float_19"]);
-            //preloadedGO.Add("LiftPlat", preloadedObjects["Crossroads_07"]["_Scenery/plat_lift_11"]);
+            preloadedGO.Add("LongPlat", preloadedObjects["Tutorial_01"]["_Scenery/plat_float_19"]);
+            preloadedGO.Add("LiftPlat", preloadedObjects["Crossroads_07"]["_Scenery/plat_lift_11"]);
             //preloadedGO.Add("DreamFlash", preloadedObjects["GG_Ghost_Xero"]["Warrior/Ghost Warrior Xero/White Flash"]);
             //preloadedGO.Add("DreamFlash3", preloadedObjects["GG_Ghost_No_Eyes"]["Warrior/Ghost Warrior No Eyes/Warp Out"]);
             preloadedGO.Add("Bench", preloadedObjects["Town"]["RestBench"]);
             preloadedGO.Add("LoreTablet", preloadedObjects["Tutorial_01"]["_Props/Tut_tablet_top (2)"]);
             preloadedGO.Add("GoamWorm", preloadedObjects["Crossroads_13"]["_Enemies/Worm"]);
             //preloadedGO.Add("Saw", preloadedObjects["White_Palace_05"]["wp_saw (14)"]);
-            preloadedGO.Add("ShadowGate", preloadedObjects["Deepnest_44"]["shadow_gate"]);
+            //preloadedGO.Add("ShadowGate", preloadedObjects["Deepnest_44"]["shadow_gate"]);
             preloadedGO.Add("Focus Blast", preloadedObjects["GG_Hollow_Knight"]["Battle Scene/Focus Blasts/HK Prime Blast (4)/Blast"]);
             preloadedGO.Add("VoltTwister", preloadedObjects["Room_Colosseum_Gold"]["Colosseum Manager/Waves/Wave 25/Electric Mage New"]);
             preloadedGO.Add("Lever", preloadedObjects["Crossroads_03"]["_Props/Toll Gate Switch"]);
@@ -131,12 +132,12 @@ namespace Hollowed_Mode
             //preloadedGO.Add("ShieldZombie", preloadedObjects["Crossroads_15"]["_Enemies/Zombie Shield 1"]);
             //preloadedGO.Add("ZombieGuard", preloadedObjects["Crossroads_48"]["Zombie Guard"]);
             preloadedGO.Add("AspidMother", preloadedObjects["Crossroads_35"]["Infected_Parent/Hatcher (1)"]);
-            //preloadedGO.Add("ZapCloud", preloadedObjects["Fungus3_24"]["Zap Cloud (1)"]);
+            preloadedGO.Add("ZapCloud", preloadedObjects["Fungus3_24"]["Zap Cloud (1)"]);
             //preloadedGO.Add("Mushroom Turret", preloadedObjects["Fungus2_08"]["Mushroom Turret"]);
             //preloadedGO.Add("SentryNail", preloadedObjects["Ruins1_17"]["Ruins Sentry 1"]);
             //preloadedGO.Add("SentrySpear", preloadedObjects["Ruins1_17"]["Ruins Flying Sentry Javelin (1)"]);
             preloadedGO.Add("PrimalAsp", preloadedObjects["Deepnest_East_04"]["Super Spitter"]);
-            //preloadedGO.Add("Mage Knight", preloadedObjects["GG_Mage_Knight"]["Mage Knight"]);
+            preloadedGO.Add("Mage Knight", preloadedObjects["GG_Mage_Knight"]["Mage Knight"]);
             //preloadedGO.Add("Traitor Lord", preloadedObjects["GG_Traitor_Lord"]["Battle Scene/Wave 3/Mantis Traitor Lord"]);
             preloadedGO.Add("Soul Master", preloadedObjects["GG_Soul_Master"]["Mage Lord"]);
         }
@@ -312,6 +313,7 @@ namespace Hollowed_Mode
         }
         void addAspidMother(float posX, float posY, int health, int babyHealth)
         {
+            //Can't integrate the changeAspidMotherFSM code into this because of the Infected_Parent/ object
             var asp1 = GameObject.Instantiate(Hollowed_Mode.preloadedGO["AspidMother"]);
             asp1.transform.position = new Vector3(posX, posY, 0f);
             asp1.SetActive(true);
@@ -361,12 +363,13 @@ namespace Hollowed_Mode
             boss.transform.position = new Vector3(posX, posY, 0f);
             boss.SetActive(true);
             boss.GetComponent<HealthManager>().hp = health;
-            PlayMakerFSM bossFsm = boss.LocateMyFSM("Mage Knight");
+            changeMageKnightFSM(boss.name);
+            /*PlayMakerFSM bossFsm = boss.LocateMyFSM("Mage Knight");
             bossFsm.GetAction<WaitRandom>("Idle", 5).timeMin = 0.01f;
             bossFsm.GetAction<WaitRandom>("Idle",5).timeMax = 0.1f;
             bossFsm.InsertMethod("Stomp Recover", 0, () => createShockwave(false, boss.transform.position.x, boss.transform.position.y - 3.4f, 2.5f, 11f, 3));
             bossFsm.InsertMethod("Stomp Recover", 0, () => createShockwave(true, boss.transform.position.x, boss.transform.position.y - 3.4f, 2.5f, 11f, 3));
-            bossFsm.InsertMethod("Stomp Recover", 0, () => Log("Boss position is: "+boss.transform.position.x+" "+boss.transform.position.y));
+            bossFsm.InsertMethod("Stomp Recover", 0, () => Log("Boss position is: "+boss.transform.position.x+" "+boss.transform.position.y));*/
         }
         void addVoltTwister(float posX, float posY, int health)
         {
@@ -653,10 +656,8 @@ namespace Hollowed_Mode
             PlayMakerFSM bossFsm = boss.LocateMyFSM("FalseyControl");
             Log("Check2");
             bossFsm.InsertMethod("JA Antic", 0, () => counter1 = 0);
-            bossFsm.InsertMethod("JA Antic", 0, () => Log("Lmao"));
             Log("Check3");
-            //bossFsm.InsertMethod("JA Jump", 0,() => falseKnightChainSlams(objectname));
-            bossFsm.GetAction<SetVelocity2d>("JA Jump", 4).y = 160;
+            bossFsm.GetAction<SetVelocity2d>("JA Jump", 4).y = 110;
             bossFsm.GetAction<Wait>("S Attack Antic", 1).time = 0.1f;
             Log("Check4");
             bossFsm.InsertMethod("JA Right", 0, () => bossSwitch1 = true);
@@ -675,7 +676,6 @@ namespace Hollowed_Mode
             bossFsm.InsertMethod("To Phase 3", 0, () => counter2 = 2);
             Log("Check5");
             bossFsm.InsertMethod("JA Slam", 0,() => Log("Shockwaves Spawned and Chain Slam "+counter1));
-            bossFsm.GetAction<SetVelocity2d>("Jump", 5).y = 160;
             Log("Check6");
         }
         private void falseKnightShockwaves(float xpos, float ypos)
@@ -1085,7 +1085,6 @@ namespace Hollowed_Mode
             }
             if (to.name == "Crossroads_38")
             {
-                addBench(59.2f, 3.3f, -0.1f);
             }
             if (to.name == "Crossroads_25") //Brooding Mawlek Path
             {
@@ -1140,7 +1139,6 @@ namespace Hollowed_Mode
             }
             if (to.name == "Crossroads_12") //Left of Cornifer
             {
-                addBench(63f, 10f, -0.1f);
                 foreach (var gameobject in to.GetRootGameObjects())
                 {
                     if (gameobject.name == "_Scenery")
@@ -1229,22 +1227,12 @@ namespace Hollowed_Mode
             }
             if (to.name == "Crossroads_10") //False Knight Battle Room
             {
-                foreach (var gameobject in to.GetRootGameObjects())
-                {
-                    Log(gameobject.name + "has been found");                 
-                }
-                addAspidMother(10f, 10f, 35, 15);
-                addAspidMother(15f, 10f, 35, 15);
-                addAspidMother(20f, 10f, 35, 15);
+                if (isBossfight == false) Log("Bossfight isn't loaded, re-enter the room to load properly");
             }
             if (to.name == "Crossroads_10_boss")
             {
-                foreach (var gameobject in to.GetRootGameObjects())
-                {
-                    Log(gameobject.name + "has been found in _boss");
-                }
-                Log("False Knight has been found and his FSM has been modified");
                 isBossfight = true;
+                frameCounter2 = 1;
                 bossNumber = 6;
             }
             if (to.name == "Crossroads_10_preload")
