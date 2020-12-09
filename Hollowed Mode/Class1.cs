@@ -5,15 +5,6 @@ using ModCommon.Util;
 using System.Collections.Generic;
 using UnityEngine;
 using USceneManager = UnityEngine.SceneManagement.SceneManager;
-//using GlobalEnums;
-/*using ModCommon;
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Collections;*/
-//using System.Net.Mime;
-//using System.Runtime.Remoting.Messaging;
-//using On;
 public class SaveModSettings : ModSettings
 {
     public bool beenToCrossroads;
@@ -40,7 +31,9 @@ namespace Hollowed_Mode
             loadedOnce = false,
             runEveryFrameScript = false,
             platedShellEqipped = false,
-            timedSwitch = false;
+            timedSwitch = false,
+            bossSwitch1 = false,
+            bossSwitch2 = false;
 
         private int counter1 = 0,
             counter2 = 0,
@@ -58,7 +51,7 @@ namespace Hollowed_Mode
         {
             
         }
-        public override string GetVersion() => "BetaVer 1.0";
+        public override string GetVersion() => "Ibucko";
         
         public override List<(string, string)> GetPreloadNames()
         {
@@ -66,12 +59,12 @@ namespace Hollowed_Mode
             {
                 ("Tutorial_01", "_Props/Cave Spikes"),
                 ("Tutorial_01", "_Props/Cave Spikes (2)"),
-                ("Fungus1_30", "fungd_spikes_06"),
-                ("Fungus1_30", "fungd_spikes_05"),
-                ("Fungus1_30", "Thorn Collider (7)"),
+                //("Fungus1_30", "fungd_spikes_06"),
+                //("Fungus1_30", "fungd_spikes_05"),
+                //("Fungus1_30", "Thorn Collider (7)"),
                 ("Fungus2_13", "Direction Pole Bench"),
-                ("Tutorial_01", "_Scenery/plat_float_19"),
-                ("Crossroads_07", "_Scenery/plat_lift_11"),
+                //("Tutorial_01", "_Scenery/plat_float_19"),
+                //("Crossroads_07", "_Scenery/plat_lift_11"),
                 //("GG_Ghost_Xero", "Warrior/Ghost Warrior Xero/White Flash"),
                 //("GG_Ghost_No_Eyes", "Warrior/Ghost Warrior No Eyes/Warp Out"),
                 ("Town", "RestBench"),
@@ -85,18 +78,18 @@ namespace Hollowed_Mode
                 ("Room_Colosseum_Gold", "Colosseum Manager/Waves/Wave 25/Electric Mage New"),
                 ("Crossroads_03", "_Props/Toll Gate"),
                 ("Crossroads_03", "_Props/Toll Gate Switch"),
-                ("Crossroads_15", "_Enemies/Zombie Shield 1"),
-                ("Crossroads_48","Zombie Guard"),
+                //("Crossroads_15", "_Enemies/Zombie Shield 1"),
+                //("Crossroads_48","Zombie Guard"),
                 ("Crossroads_35","Infected_Parent/Hatcher (1)"),
-                ("Fungus1_19", "_Enemies/Fat Fly"),
+                //("Fungus1_19", "_Enemies/Fat Fly"),
                 ("Crossroads_22", "Spitter (3)"),
-                ("Fungus3_24", "Zap Cloud (1)"),
+                //("Fungus3_24", "Zap Cloud (1)"),
                 //("Fungus2_08", "Mushroom Turret"),
-                ("Ruins1_17", "Ruins Sentry 1"),
-                ("Ruins1_17", "Ruins Flying Sentry Javelin (1)"),
+                //("Ruins1_17", "Ruins Sentry 1"),
+                //("Ruins1_17", "Ruins Flying Sentry Javelin (1)"),
                 ("Deepnest_East_04", "Super Spitter"),
-                ("GG_Mage_Knight", "Mage Knight"),
-                ("GG_Traitor_Lord", "Battle Scene/Wave 3/Mantis Traitor Lord"),
+                //("GG_Mage_Knight", "Mage Knight"),
+                //("GG_Traitor_Lord", "Battle Scene/Wave 3/Mantis Traitor Lord"),
                 ("GG_Soul_Master", "Mage Lord")
             };
         }
@@ -114,12 +107,12 @@ namespace Hollowed_Mode
             ModHooks.Instance.HeroUpdateHook += OnHeroUpdate;
             preloadedGO.Add("SpikeCol", preloadedObjects["Tutorial_01"]["_Props/Cave Spikes"]);
             preloadedGO.Add("Spikes", preloadedObjects["Tutorial_01"]["_Props/Cave Spikes (2)"]);
-            preloadedGO.Add("ThornSmall1", preloadedObjects["Fungus1_30"]["fungd_spikes_05"]);
-            preloadedGO.Add("ThornSmall2", preloadedObjects["Fungus1_30"]["fungd_spikes_06"]);
-            preloadedGO.Add("ThornCol", preloadedObjects["Fungus1_30"]["Thorn Collider (7)"]);
+            //preloadedGO.Add("ThornSmall1", preloadedObjects["Fungus1_30"]["fungd_spikes_05"]);
+            //preloadedGO.Add("ThornSmall2", preloadedObjects["Fungus1_30"]["fungd_spikes_06"]);
+            //preloadedGO.Add("ThornCol", preloadedObjects["Fungus1_30"]["Thorn Collider (7)"]);
             preloadedGO.Add("BenchDirectionPole", preloadedObjects["Fungus2_13"]["Direction Pole Bench"]);
-            preloadedGO.Add("LongPlat", preloadedObjects["Tutorial_01"]["_Scenery/plat_float_19"]);
-            preloadedGO.Add("LiftPlat", preloadedObjects["Crossroads_07"]["_Scenery/plat_lift_11"]);
+            //preloadedGO.Add("LongPlat", preloadedObjects["Tutorial_01"]["_Scenery/plat_float_19"]);
+            //preloadedGO.Add("LiftPlat", preloadedObjects["Crossroads_07"]["_Scenery/plat_lift_11"]);
             //preloadedGO.Add("DreamFlash", preloadedObjects["GG_Ghost_Xero"]["Warrior/Ghost Warrior Xero/White Flash"]);
             //preloadedGO.Add("DreamFlash3", preloadedObjects["GG_Ghost_No_Eyes"]["Warrior/Ghost Warrior No Eyes/Warp Out"]);
             preloadedGO.Add("Bench", preloadedObjects["Town"]["RestBench"]);
@@ -134,17 +127,17 @@ namespace Hollowed_Mode
             preloadedGO.Add("Vengefly", preloadedObjects["Tutorial_01"]["_Enemies/Buzzer 1"]);
             preloadedGO.Add("Gruz", preloadedObjects["Crossroads_04"]["_Enemies/Fly Spawn/Fly 1"]);
             preloadedGO.Add("Aspid", preloadedObjects["Crossroads_22"]["Spitter (3)"]);
-            preloadedGO.Add("Oble", preloadedObjects["Fungus1_19"]["_Enemies/Fat Fly"]);
-            preloadedGO.Add("ShieldZombie", preloadedObjects["Crossroads_15"]["_Enemies/Zombie Shield 1"]);
-            preloadedGO.Add("ZombieGuard", preloadedObjects["Crossroads_48"]["Zombie Guard"]);
+            //preloadedGO.Add("Oble", preloadedObjects["Fungus1_19"]["_Enemies/Fat Fly"]);
+            //preloadedGO.Add("ShieldZombie", preloadedObjects["Crossroads_15"]["_Enemies/Zombie Shield 1"]);
+            //preloadedGO.Add("ZombieGuard", preloadedObjects["Crossroads_48"]["Zombie Guard"]);
             preloadedGO.Add("AspidMother", preloadedObjects["Crossroads_35"]["Infected_Parent/Hatcher (1)"]);
-            preloadedGO.Add("ZapCloud", preloadedObjects["Fungus3_24"]["Zap Cloud (1)"]);
+            //preloadedGO.Add("ZapCloud", preloadedObjects["Fungus3_24"]["Zap Cloud (1)"]);
             //preloadedGO.Add("Mushroom Turret", preloadedObjects["Fungus2_08"]["Mushroom Turret"]);
-            preloadedGO.Add("SentryNail", preloadedObjects["Ruins1_17"]["Ruins Sentry 1"]);
-            preloadedGO.Add("SentrySpear", preloadedObjects["Ruins1_17"]["Ruins Flying Sentry Javelin (1)"]);
+            //preloadedGO.Add("SentryNail", preloadedObjects["Ruins1_17"]["Ruins Sentry 1"]);
+            //preloadedGO.Add("SentrySpear", preloadedObjects["Ruins1_17"]["Ruins Flying Sentry Javelin (1)"]);
             preloadedGO.Add("PrimalAsp", preloadedObjects["Deepnest_East_04"]["Super Spitter"]);
-            preloadedGO.Add("Mage Knight", preloadedObjects["GG_Mage_Knight"]["Mage Knight"]);
-            preloadedGO.Add("Traitor Lord", preloadedObjects["GG_Traitor_Lord"]["Battle Scene/Wave 3/Mantis Traitor Lord"]);
+            //preloadedGO.Add("Mage Knight", preloadedObjects["GG_Mage_Knight"]["Mage Knight"]);
+            //preloadedGO.Add("Traitor Lord", preloadedObjects["GG_Traitor_Lord"]["Battle Scene/Wave 3/Mantis Traitor Lord"]);
             preloadedGO.Add("Soul Master", preloadedObjects["GG_Soul_Master"]["Mage Lord"]);
         }
         //-----------------------------------------------------------------------------------------------------
@@ -293,6 +286,12 @@ namespace Hollowed_Mode
         void addAspidHunter(float posX, float posY)
         {
             var asp2 = GameObject.Instantiate(Hollowed_Mode.preloadedGO["Aspid"]);
+            asp2.transform.position = new Vector3(posX, posY, 0f);
+            asp2.SetActive(true);
+        }
+        void addShieldZombie(float posX, float posY)
+        {
+            var asp2 = GameObject.Instantiate(Hollowed_Mode.preloadedGO["ShieldZombie"]);
             asp2.transform.position = new Vector3(posX, posY, 0f);
             asp2.SetActive(true);
         }
@@ -626,7 +625,7 @@ namespace Hollowed_Mode
             bossFsm.InsertMethod("Slam Down", 0,() => createShockwave(false, boss.transform.position.x, boss.transform.position.y - 1.8f, 1.4f, 22f, 1));
             bossFsm.InsertMethod("Slam Down", 0,() => createShockwave(true, boss.transform.position.x, boss.transform.position.y - 1.8f, 1.4f, 22f, 1));
         }
-        /*private void changeVengeflyKingFSM(string objectname)
+        private void changeVengeflyKingFSM(string objectname)
         {
             var boss = GameObject.Find(objectname);
             PlayMakerFSM bossFsm = boss.LocateMyFSM("Big Buzzer");
@@ -641,18 +640,76 @@ namespace Hollowed_Mode
             bossFsm.GetAction<Wait>("Swoop L", 4).time = 0.6f;
             bossFsm.GetAction<SetVelocity2d>("Swoop R", 2).x = 40f;
             bossFsm.GetAction<Wait>("Swoop R", 4).time = 0.4f;
-        }*/
-        private void changeFalseKnightFSM(string objectname)
+        }
+        private void changeFalseKnightFSM(string objectname, float ycoord, int addHealth)
         {
+            //Fix it so shockwaves trigger once because they trigger multiple times.
+            //A bool variable check and a set on every antic action should fix it
             var boss = GameObject.Find(objectname);
+            Log("Check1");
+            foreach (DamageHero x in boss.GetComponentsInChildren<DamageHero>(true))
+                x.damageDealt = 2;
+            boss.GetComponent<HealthManager>().hp += addHealth;
             PlayMakerFSM bossFsm = boss.LocateMyFSM("FalseyControl");
+            Log("Check2");
             bossFsm.InsertMethod("JA Antic", 0, () => counter1 = 0);
-            bossFsm.InsertMethod("JA Jump", 0,() => falseKnightChainSlams(objectname));
-            bossFsm.GetAction<SetVelocity2d>("JA Jump", 4).y = 50;
-            bossFsm.InsertMethod("JA Slam", 0,() => createShockwave(false, boss.transform.position.x, boss.transform.position.y, 2.5f, 22f, 1));
-            bossFsm.InsertMethod("JA Slam", 0,() => createShockwave(true, boss.transform.position.x, boss.transform.position.y, 1.2f, 22f, 1));
+            bossFsm.InsertMethod("JA Antic", 0, () => Log("Lmao"));
+            Log("Check3");
+            //bossFsm.InsertMethod("JA Jump", 0,() => falseKnightChainSlams(objectname));
+            bossFsm.GetAction<SetVelocity2d>("JA Jump", 4).y = 160;
+            bossFsm.GetAction<Wait>("S Attack Antic", 1).time = 0.1f;
+            Log("Check4");
+            bossFsm.InsertMethod("JA Right", 0, () => bossSwitch1 = true);
+            bossFsm.InsertMethod("JA Left", 0, () => bossSwitch1 = false);
+            bossFsm.InsertMethod("JA Antic", 0, () => frameCounter1 = 1);
+            bossFsm.InsertMethod("JA Slam", 0, () => falseKnightShockwaves(boss.transform.position.x, ycoord));
+            bossFsm.InsertMethod("S Antic", 0, () => frameCounter1 = 2);
+            bossFsm.InsertMethod("S Land", 0, () => falseKnightShockwaves(boss.transform.position.x, ycoord));
+            bossFsm.InsertMethod("Jump", 0, () => frameCounter1 = 2);
+            bossFsm.InsertMethod("Land Noise", 0, () => falseKnightShockwaves(boss.transform.position.x, ycoord));
+            bossFsm.InsertMethod("Run", 0, () => createShockwave(false, boss.transform.position.x, ycoord, 0.2f, 22f, 1));
+            bossFsm.InsertMethod("Run", 0, () => createShockwave(true, boss.transform.position.x, ycoord, 0.2f, 22f, 1));
+            bossFsm.InsertMethod("S Attack Antic", 0, () => frameCounter1 = 3);
+            bossFsm.InsertMethod("Slam", 0, () => falseKnightShockwaves(boss.transform.position.x, ycoord));
+            bossFsm.InsertMethod("To Phase 2", 0, () => counter2 = 1);
+            bossFsm.InsertMethod("To Phase 3", 0, () => counter2 = 2);
+            Log("Check5");
             bossFsm.InsertMethod("JA Slam", 0,() => Log("Shockwaves Spawned and Chain Slam "+counter1));
-            bossFsm.GetAction<SetVelocity2d>("Jump", 6).y = 50;
+            bossFsm.GetAction<SetVelocity2d>("Jump", 5).y = 160;
+            Log("Check6");
+        }
+        private void falseKnightShockwaves(float xpos, float ypos)
+        {
+            Log("Counter 1: " + counter1 + " Counter 2: " + counter2);
+            if(frameCounter1 > 0) switch (frameCounter1)
+            {
+                case 1:
+                    if (bossSwitch1)
+                    {
+                        createShockwave(true, xpos, ypos, 3.5f, 22f, 1);
+                        createShockwave(false, xpos, ypos, 1.2f, 22f, 1);
+                    }
+                    else
+                    {
+                        createShockwave(true, xpos, ypos, 1.2f, 22f, 1);
+                        createShockwave(false, xpos, ypos, 3.5f, 22f, 1);
+                    }
+                    if (counter2 == 1) addBigAspid(HeroController.instance.transform.position.x, 41f);
+                    if (counter2 == 2) addPrimalAspid(HeroController.instance.transform.position.x, 41f, 60, 2f);
+                    break;
+                case 2:
+                    createShockwave(true, xpos, ypos, 1.2f, 22f, 1);
+                    createShockwave(false, xpos, ypos, 1.2f, 22f, 1);
+                    break;
+                case 3:
+                    createShockwave(false, xpos-3f, ypos, 2.2f, 11f, 1);
+                    createShockwave(true, xpos+3f, ypos, 2.2f, 11f, 1);
+                    if (counter2 == 1) addBigAspid(HeroController.instance.transform.position.x, 41f);
+                    if (counter2 == 2) addPrimalAspid(HeroController.instance.transform.position.x, 41f, 60, 2f);
+                    break;
+                }
+            frameCounter1 = 0;
+
         }
         private void falseKnightChainSlams(string objectname)
         {
@@ -677,7 +734,7 @@ namespace Hollowed_Mode
             headFsm.GetAction<Wait>("Shoot Antic", 1).time = 0.041f;
             headFsm.InsertMethod("Shoot", 0,() => starvingMawlek(boss.transform.position.x, boss.transform.position.y + 3f));
         }
-        /*private void changeMassiveMossChargerFSM(string objectname, int plusHeath)
+        private void changeMassiveMossChargerFSM(string objectname, int plusHeath)
         {
             var boss = GameObject.Find(objectname);
             PlayMakerFSM bossFsm = boss.LocateMyFSM("Mossy Control");
@@ -768,7 +825,7 @@ namespace Hollowed_Mode
             bossFsm.GetAction<WaitRandom>("Idle",5).timeMax = 0.1f;
             bossFsm.InsertMethod("Stomp Recover", 0, () => createShockwave(false, boss.transform.position.x, boss.transform.position.y - 3.4f, 2.5f, 11f, 3));
             bossFsm.InsertMethod("Stomp Recover", 0, () => createShockwave(true, boss.transform.position.x, boss.transform.position.y - 3.4f, 2.5f, 11f, 3));
-        }*/
+        }
 
         //-----------------------------------------------------------------------------------------------------
         //                                               Room Changes
@@ -1172,9 +1229,32 @@ namespace Hollowed_Mode
             }
             if (to.name == "Crossroads_10") //False Knight Battle Room
             {
+                foreach (var gameobject in to.GetRootGameObjects())
+                {
+                    Log(gameobject.name + "has been found");                 
+                }
+                addAspidMother(10f, 10f, 35, 15);
+                addAspidMother(15f, 10f, 35, 15);
+                addAspidMother(20f, 10f, 35, 15);
+            }
+            if (to.name == "Crossroads_10_boss")
+            {
+                foreach (var gameobject in to.GetRootGameObjects())
+                {
+                    Log(gameobject.name + "has been found in _boss");
+                }
+                Log("False Knight has been found and his FSM has been modified");
                 isBossfight = true;
                 bossNumber = 6;
             }
+            if (to.name == "Crossroads_10_preload")
+            {
+                foreach (var gameobject in to.GetRootGameObjects())
+                {
+                    Log(gameobject.name + "has been found in _preload");
+                }
+            }
+            
             //Godhome Bossfights
             if (to.name == "GG_Workshop")
             {
@@ -1182,7 +1262,17 @@ namespace Hollowed_Mode
                 isBossfight = false;
                 bossNumber = 0;
             }
-            /*if (to.name == "GG_Gruz_Mother")
+            if (to.name == "GG_False_Knight")
+            {
+                counter1 = 0;
+                counter2 = 0;
+                frameCounter1 = 0;
+                frameCounter2 = 1;
+                bossSwitch1 = false;
+                isBossfight = true;
+                bossNumber = 6;
+            }
+            if (to.name == "GG_Gruz_Mother")
             {
                 counter1 = 0;
                 changeGruzMotherFSM("Giant Fly", 40, 100, false);
@@ -1311,7 +1401,7 @@ namespace Hollowed_Mode
                 isBossfight = true;
                 bossNumber = 3;
                 counter2 = 0;
-            }*/
+            }
         }
         public void EnemyHit(On.HealthManager.orig_TakeDamage orig, HealthManager self, HitInstance hit)
         {
@@ -1320,7 +1410,7 @@ namespace Hollowed_Mode
             {
                 switch (bossNumber)
                 {
-                    /*//Brooding Mawlek - Set FSM properly
+                    //Brooding Mawlek - Set FSM properly
                     case 1:
                         if (counter2 < 1)
                         {
@@ -1359,10 +1449,11 @@ namespace Hollowed_Mode
                             changeMarmuFSM("Warrior/Ghost Warrior Marmu");
                             counter2++;
                         }
-                        break;*/
+                        break;
                     case 6:
-                        //changeFalseKnightFSM("Battle Scene/False Knight New");
-                        Log("FSM Sucessfully set");
+                        Log("Boss Number is 6");
+                        if(frameCounter2 == 1) changeFalseKnightFSM("Battle Scene/False Knight New", 26f, 200);
+                        frameCounter2 = 0;
                         break;
                 }
             }
@@ -1376,23 +1467,44 @@ namespace Hollowed_Mode
                     //No Eyes uses Focus Blasts to attack the knight
                     case 0:
                         frameCounter1++;
-                        if (frameCounter1 == 200) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 1.1f, 2);
-                        if (frameCounter1 == 400)
+                        switch (frameCounter1)
                         {
-                            createFocusBlast(HeroController.instance.transform.position.x, 3f, 1.1f, 2);
-                            createFocusBlast(HeroController.instance.transform.position.x, 9f, 1.1f, 2);
-                            createFocusBlast(HeroController.instance.transform.position.x, 15f, 1.1f, 2);
-                            createFocusBlast(HeroController.instance.transform.position.x, 21f, 1.1f, 2);
-                            createFocusBlast(HeroController.instance.transform.position.x, 27f, 1.1f, 2);
+                            case 200:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 1.1f, 2);
+                                break;
+                            case 400:
+                                createFocusBlast(HeroController.instance.transform.position.x, 3f, 1.1f, 2);
+                                createFocusBlast(HeroController.instance.transform.position.x, 9f, 1.1f, 2);
+                                createFocusBlast(HeroController.instance.transform.position.x, 15f, 1.1f, 2);
+                                createFocusBlast(HeroController.instance.transform.position.x, 21f, 1.1f, 2);
+                                createFocusBlast(HeroController.instance.transform.position.x, 27f, 1.1f, 2);
+                                break;
+                            case 500:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 1.6f, 2);
+                                break;
+                            case 750:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.7f, 2);
+                                break;
+                            case 780:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.7f, 2);
+                                break;
+                            case 810:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.8f, 2);
+                                break;
+                            case 840:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.8f, 2);
+                                break;
+                            case 870:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.9f, 2);
+                                break;
+                            case 900:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.9f, 2);
+                                break;
+                            case 929:
+                                createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 1.1f, 2);
+                                frameCounter1 = 0;
+                                break;
                         }
-                        if (frameCounter1 == 500) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 1.6f, 2);
-                        if (frameCounter1 == 750) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.7f, 2);
-                        if (frameCounter1 == 780) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.7f, 2);
-                        if (frameCounter1 == 810) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.8f, 2);
-                        if (frameCounter1 == 840) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.8f, 2);
-                        if (frameCounter1 == 870) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.9f, 2);
-                        if (frameCounter1 == 900) createFocusBlast(HeroController.instance.transform.position.x, HeroController.instance.transform.position.y, 0.9f, 2);
-                        if (frameCounter1 == 929) frameCounter1 = 199;
                         break;
                     //Mantis Lord in the Crossroads
                     case 1:
